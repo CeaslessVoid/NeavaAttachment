@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-  <name>Neava's Attachemnts</name>
+  <name>Neava's Mods</name>
   <author>Neava</author>
   <url></url>
   <supportedVersions>
@@ -15,7 +15,7 @@
 		</li>
 	</modDependencies>
 
-  <packageId>Neava.GunAttachments.Base</packageId>
+  <packageId>Neava.GunMods.Base</packageId>
   <modVersion IgnoreIfNoMatchingField="True">1.0.0</modVersion>
   <description></description>
   <loadAfter>

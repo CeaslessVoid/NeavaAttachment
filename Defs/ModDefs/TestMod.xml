@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <NeavaMods.ModDef>
+    <defName>Mod_Test</defName>
+    <label>Test Mod</label>
+    <statOffsets>
+        <RangedWeapon_Cooldown>-0.3</RangedWeapon_Cooldown>
+        <AimingDelayFactor>0.25</AimingDelayFactor>
+    </statOffsets>
+  </NeavaMods.ModDef>
+</Defs>

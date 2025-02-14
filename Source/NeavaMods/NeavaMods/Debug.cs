@@ -16,16 +16,16 @@ namespace NeavaMods
         {
 
             ThingWithComps weapon = (ThingWithComps)ThingMaker.MakeThing(ThingDef.Named("Gun_AssaultRifle"));
-            var comp = weapon.TryGetComp<CompAttachments>();
+            var comp = weapon.TryGetComp<CompMods>();
             if (comp != null)
             {
-                var testAttachment = DefDatabase<AttachmentDef>.GetNamed("Attachment_Test");
-                comp.TryAddAttachment(testAttachment);
+                var testAttachment = DefDatabase<ModDef>.GetNamed("Mod_Test");
+                comp.TryAddMod(1,testAttachment);
             }
             GenPlace.TryPlaceThing(weapon, UI.MouseCell(), Find.CurrentMap, ThingPlaceMode.Near);
-            Messages.Message("Spawned an Assault Rifle with the Test Attachment!", MessageTypeDefOf.TaskCompletion, false);
+            Messages.Message("Spawned an Assault Rifle with the Test Mod!", MessageTypeDefOf.TaskCompletion, false);
         }
 
-        private const string CATEGORY = "Neava's Attachments";
+        private const string CATEGORY = "Neava's Mods";
     }
 }

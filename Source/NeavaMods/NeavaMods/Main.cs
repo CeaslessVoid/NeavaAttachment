@@ -33,7 +33,7 @@ namespace NeavaMods
     {
         static DebugAttachmentDefs()
         {
-            foreach (var def in DefDatabase<AttachmentDef>.AllDefsListForReading)
+            foreach (var def in DefDatabase<ModDef>.AllDefsListForReading)
             {
                 Log.Message($"Loaded AttachmentDef: {def.defName}");
             }

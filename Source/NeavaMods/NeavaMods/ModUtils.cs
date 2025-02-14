@@ -11,17 +11,17 @@ namespace NeavaMods
     {
         public static void Msg(object o)
         {
-            Log.Message("[Neava's Attachments] " + ((o != null) ? o.ToString() : null));
+            Log.Message("[Neava's Mods] " + ((o != null) ? o.ToString() : null));
         }
 
         public static void Warn(object o)
         {
-            Log.Warning("[Neava's Attachments] " + ((o != null) ? o.ToString() : null));
+            Log.Warning("[Neava's Mods] " + ((o != null) ? o.ToString() : null));
         }
 
         public static void Error(object o)
         {
-            Log.Error("[Neava's Attachments] " + ((o != null) ? o.ToString() : null));
+            Log.Error("[Neava's Mods] " + ((o != null) ? o.ToString() : null));
         }
 
     }
