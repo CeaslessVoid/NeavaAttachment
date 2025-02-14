@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[@Name="BaseGunWithQuality"]/comps</xpath>
+		<value>
+			<li>
+                <compClass>NeavaAttachments.CompAttachments</compClass>
+            </li>
+		</value>
+	</Operation>
+</Patch>
