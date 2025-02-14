@@ -6,8 +6,8 @@
     <location>Other</location>
     <bulk>0.1</bulk>
     <statOffsets>
-      <RangedWeapon_Cooldown>1.6</RangedWeapon_Cooldown>
-      <AimingDelayFactor>0.25</AimingDelayFactor>
+        <RangedWeapon_Cooldown>-0.3</RangedWeapon_Cooldown>
+        <AimingDelayFactor>0.25</AimingDelayFactor>
     </statOffsets>
   </NeavaAttachments.AttachmentDef>
 </Defs>

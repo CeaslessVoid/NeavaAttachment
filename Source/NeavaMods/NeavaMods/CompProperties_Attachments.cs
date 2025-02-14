@@ -18,9 +18,11 @@ namespace NeavaAttachments
 
     public class CompAttachments : ThingComp
     {
-        private static readonly List<string> ValidAttachmentSlots = new List<string> { "Optics", "Barrel", "Underbarrel", "Other" };
+        private static readonly List<string> ValidAttachmentSlots = new List<string> { "Optics", "Barrel", "Underbarrel", "Magazine", "Special","Other" };
 
         private Dictionary<string, AttachmentDef> attachments = new Dictionary<string, AttachmentDef>();
+
+        public Dictionary<string, AttachmentDef> Attachments => attachments;
 
         public override void PostExposeData()
         {
@@ -54,35 +56,8 @@ namespace NeavaAttachments
         {
             return attachments.TryGetValue(slot, out var attachment) ? attachment : null;
         }
-
-        public override void Notify_Equipped(Pawn pawn)
-        {
-            base.Notify_Equipped(pawn);
-            RecalculateStats();
-        }
-
-        public void RecalculateStats()
-        {
-            foreach (var attachment in attachments.Values)
-            {
-                if (attachment.statOffsets != null)
-                {
-                    foreach (var statModifier in attachment.statOffsets)
-                    {
-                        parent.GetStatValue(statModifier.stat, true);
-                    }
-                }
-            }
-        }
-
-        public override IEnumerable<StatDrawEntry> SpecialDisplayStats()
-        {
-            foreach (var kvp in attachments)
-            {
-                yield return new StatDrawEntry(StatCategoryDefOf.Weapon, $"Attachment ({kvp.Key})", kvp.Value.label, kvp.Value.description, 0);
-            }
-        }
     }
+
 }
 
 
