@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 
-namespace NeavaAttachments
+namespace NeavaMods
 {
     public class CompProperties_Attachments : CompProperties
     {

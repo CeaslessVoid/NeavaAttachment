@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <NeavaAttachments.AttachmentDef>
+  <NeavaMods.AttachmentDef>
     <defName>Attachment_Test</defName>
     <label>Test Attachment</label>
     <location>Other</location>
@@ -9,5 +9,5 @@
         <RangedWeapon_Cooldown>-0.3</RangedWeapon_Cooldown>
         <AimingDelayFactor>0.25</AimingDelayFactor>
     </statOffsets>
-  </NeavaAttachments.AttachmentDef>
+  </NeavaMods.AttachmentDef>
 </Defs>

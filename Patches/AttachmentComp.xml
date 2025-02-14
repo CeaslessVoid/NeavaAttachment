@@ -4,7 +4,7 @@
 		<xpath>Defs/ThingDef[@Name="BaseGunWithQuality"]/comps</xpath>
 		<value>
 			<li>
-                <compClass>NeavaAttachments.CompAttachments</compClass>
+                <compClass>NeavaMods.CompAttachments</compClass>
             </li>
 		</value>
 	</Operation>

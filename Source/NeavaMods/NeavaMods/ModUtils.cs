@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 
-namespace NeavaAttachments
+namespace NeavaMods
 {
     internal static class ModUtils
     {

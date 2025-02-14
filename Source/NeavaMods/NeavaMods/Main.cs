@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 
-namespace NeavaAttachments
+namespace NeavaMods
 {
     [StaticConstructorOnStartup]
     public static class Main
@@ -18,7 +18,7 @@ namespace NeavaAttachments
 
         }
 
-        public static Harmony HarmonyInstance = new Harmony("NeavaAttachments.GunAttachments.Base");
+        public static Harmony HarmonyInstance = new Harmony("NeavaMods.GunAttachments.Base");
 
 
         public static bool IsCEActive()
