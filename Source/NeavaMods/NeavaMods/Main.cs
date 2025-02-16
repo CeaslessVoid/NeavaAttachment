@@ -18,7 +18,7 @@ namespace NeavaMods
 
         }
 
-        public static Harmony HarmonyInstance = new Harmony("NeavaMods.GunAttachments.Base");
+        public static Harmony HarmonyInstance = new Harmony("Neava.WeaponMods.Base");
 
 
         public static bool IsCEActive()
@@ -28,16 +28,16 @@ namespace NeavaMods
 
     }
 
-    [StaticConstructorOnStartup]
-    public static class DebugAttachmentDefs
-    {
-        static DebugAttachmentDefs()
-        {
-            foreach (var def in DefDatabase<ModDef>.AllDefsListForReading)
-            {
-                Log.Message($"Loaded AttachmentDef: {def.defName}");
-            }
-        }
-    }
+    //[StaticConstructorOnStartup]
+    //public static class DebugAttachmentDefs
+    //{
+    //    static DebugAttachmentDefs()
+    //    {
+    //        foreach (var def in DefDatabase<ModDef>.AllDefsListForReading)
+    //        {
+    //            Log.Message($"Loaded AttachmentDef: {def.defName}");
+    //        }
+    //    }
+    //}
 
 }

@@ -15,9 +15,15 @@ namespace NeavaMods
 
         public string extensionClass;
 
+        public List<string> tags;
+
+        public string bottomlabel;
+
         public List<string> requiredWeaponTags;
 
-        public bool matchAllntneeded; // If this then only 1 tag is needed
+        public bool matchAllNotNeeded; // If this then only 1 tag is needed
+
+        public List<ThingDefCountClass> costList;
 
         public bool not; // Not these tags
 
@@ -26,5 +32,28 @@ namespace NeavaMods
         public Polarity polarity;
 
         public int drain;
+
+        public IModEffect GetExtensionClassInstance()
+        {
+            if (string.IsNullOrEmpty(extensionClass))
+                return null;
+
+            Type type = GenTypes.GetTypeInAnyAssembly(extensionClass);
+            if (type == null || !typeof(IModEffect).IsAssignableFrom(type))
+            {
+                ModUtils.Error($"Unable to find or assign {extensionClass} as a valid IModEffect.");
+                return null;
+            }
+
+            return (IModEffect)Activator.CreateInstance(type);
+        }
+    }
+
+    public enum Polarity
+    {
+        Godel, // Weapon basic
+        Erebus, // Weapon vertical
+        Azoth, // Weapon unique
+        Monad // Weapon element
     }
 }

@@ -1,4 +1,6 @@
-﻿using RimWorld;
+﻿using HarmonyLib;
+using RimWorld;
+using RimWorld.QuestGen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,10 @@ namespace NeavaMods
         {
             base.PostExposeData();
             Scribe_Collections.Look(ref slots, "slots", LookMode.Value, LookMode.Deep);
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                RebuildEffectCache();
+            }
         }
 
         public bool TryAddMod(int slotIndex, ModDef mod, Polarity? polarity = null)
@@ -44,6 +50,7 @@ namespace NeavaMods
             // Fix later
 
             slots[slotIndex] = new ModSlot(mod, polarity);
+            RebuildEffectCache();
             return true;
         }
 
@@ -57,10 +64,31 @@ namespace NeavaMods
             return false;
         }
 
-        //public (ModDef mod, Polarity? polarity) GetSlot(int slotIndex)
-        //{
-        //    return slots.TryGetValue(slotIndex, out var slot) ? slot : (null, null);
-        //}
+        public void RebuildEffectCache()
+        {
+            cachedEffects.Clear();
+
+            foreach (var slot in slots.Values)
+            {
+                var modEffect = slot.Mod.GetExtensionClassInstance();
+                if (modEffect != null)
+                {
+                    if (!cachedEffects.ContainsKey(modEffect.ProcType))
+                    {
+                        cachedEffects[modEffect.ProcType] = new List<IModEffect>();
+                    }
+                    cachedEffects[modEffect.ProcType].Add(modEffect);
+                }
+            }
+        }
+
+        public List<IModEffect> GetEffectsByProcType(ProcType procType)
+        {
+            return cachedEffects.TryGetValue(procType, out var effects) ? effects : null;
+        }
+
+        private readonly Dictionary<ProcType, List<IModEffect>> cachedEffects = new Dictionary<ProcType, List<IModEffect>>();
+
     }
 
 }

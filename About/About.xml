@@ -15,7 +15,7 @@
 		</li>
 	</modDependencies>
 
-  <packageId>Neava.GunMods.Base</packageId>
+  <packageId>Neava.WeaponMods.Base</packageId>
   <modVersion IgnoreIfNoMatchingField="True">1.0.0</modVersion>
   <description></description>
   <loadAfter>

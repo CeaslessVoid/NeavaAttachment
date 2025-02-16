@@ -28,7 +28,7 @@ namespace NeavaMods
                     {
                         if (statOffset.stat == this.parentStat)
                         {
-                            if (this.parentStat == StatDefOf.Mass)
+                            if (this.parentStat == StatDefOf.Mass || this.parentStat == StatDefOf.MarketValue)
                             {
                                 val += statOffset.value;
                             }
@@ -61,7 +61,7 @@ namespace NeavaMods
                     {
                         if (statOffset.stat == this.parentStat)
                         {
-                            if (this.parentStat == StatDefOf.Mass)
+                            if (this.parentStat == StatDefOf.Mass || this.parentStat == StatDefOf.MarketValue)
                             {
                                 explanation.AppendLine($"{modSlot.Mod.label}: {statOffset.value:+#0.##;-#0.##}");
                             }
@@ -95,7 +95,7 @@ namespace NeavaMods
                             {
                                 if (statOffset.stat == this.parentStat)
                                 {
-                                    if (this.parentStat == StatDefOf.Mass)
+                                    if (this.parentStat == StatDefOf.Mass || this.parentStat == StatDefOf.MarketValue)
                                     {
                                         val += statOffset.value;
                                     }
@@ -127,7 +127,7 @@ namespace NeavaMods
                             {
                                 if (statOffset.stat == this.parentStat)
                                 {
-                                    if (this.parentStat == StatDefOf.Mass)
+                                    if (this.parentStat == StatDefOf.Mass || this.parentStat == StatDefOf.MarketValue)
                                     {
                                         explanation.AppendLine($"{modSlot.Mod.label}: {statOffset.value:+#0.##;-#0.##}");
                                     }

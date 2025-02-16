@@ -6,6 +6,29 @@
     <statOffsets>
         <RangedWeapon_Cooldown>-0.3</RangedWeapon_Cooldown>
         <AimingDelayFactor>0.25</AimingDelayFactor>
+        <MeleeWeapon_DamageMultiplier>0.25</MeleeWeapon_DamageMultiplier>
+        <MarketValue>100</MarketValue>
     </statOffsets>
+    
+    <description>Test Desc</description>
+
+    <tags>
+      <li>AllRound</li>
+      <li>TestTag</li>
+    </tags>
+
+    <bottomlabel>Yes</bottomlabel>
+
+    <drain>6</drain>
+
+    <polarity>Godel</polarity>
+
+    <costList>
+      <Steel>30</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    
+    <extensionClass>NeavaMods.DoubleDamageToMechsEffect</extensionClass>
+
   </NeavaMods.ModDef>
 </Defs>
