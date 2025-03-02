@@ -65,8 +65,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialog_WeaponMod.cs" />
     <Compile Include="GameComp.cs" />
-    <Compile Include="ModDef.cs" />
+    <Compile Include="JobDriver_ApplyWeaponMods.cs" />
+    <Compile Include="MachiningTable.cs" />
+    <Compile Include="WeaponModDef.cs" />
     <Compile Include="CompProperties_Mods.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Main.cs" />
@@ -77,7 +80,7 @@
     <Compile Include="Patches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="StatPart_Mods.cs" />
+    <Compile Include="StatPart_WeaponStatMod.cs" />
     <Compile Include="TestModEffects.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

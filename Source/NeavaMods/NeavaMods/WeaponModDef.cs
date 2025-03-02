@@ -8,7 +8,7 @@ using Verse;
 
 namespace NeavaMods
 {
-    public class ModDef : Def
+    public class WeaponModDef : Def
     {
 
         public List<StatModifier> statOffsets; // Diffrent from main

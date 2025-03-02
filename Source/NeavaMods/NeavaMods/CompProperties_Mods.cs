@@ -14,11 +14,11 @@ namespace NeavaMods
     {
         public CompProperties_Mods()
         {
-            compClass = typeof(CompMods);
+            compClass = typeof(CompWeaponMods);
         }
     }
 
-    public class CompMods : ThingComp
+    public class CompWeaponMods : ThingComp
     {
         public const int SlotCount = 8;
 
@@ -34,7 +34,7 @@ namespace NeavaMods
             }
         }
 
-        public bool TryAddMod(int slotIndex, ModDef mod, Polarity? polarity = null)
+        public bool TryAddMod(int slotIndex, WeaponModDef mod, Polarity? polarity = null)
         {
             if (slotIndex < 0 || slotIndex >= SlotCount)
             {
@@ -61,6 +61,7 @@ namespace NeavaMods
                 slots.Remove(slotIndex);
                 return true;
             }
+            RebuildEffectCache();
             return false;
         }
 

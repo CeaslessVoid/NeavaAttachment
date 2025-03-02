@@ -1,38 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
-    <!-- <Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[@Name="BaseGunWithQuality"]/comps</xpath>
-		<value>
-			<li>
-                <compClass>NeavaMods.CompMods</compClass>
-            </li>
-		</value>
-	</Operation>
-
-	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[@Name="BaseMeleeWeapon_Sharp_Quality"]/comps</xpath>
-		<value>
-			<li>
-                <compClass>NeavaMods.CompMods</compClass>
-            </li>
-		</value>
-	</Operation>
-
-	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[@Name="BaseMeleeWeapon_Blunt_Quality"]/comps</xpath>
-		<value>
-			<li>
-                <compClass>NeavaMods.CompMods</compClass>
-            </li>
-		</value>
-	</Operation> -->
-
 	<Operation Class="PatchOperationAdd">
 		<xpath>Defs/ThingDef[@Name="BaseWeapon"]/comps</xpath>
 		<value>
 			<li>
-                <compClass>NeavaMods.CompMods</compClass>
+                <compClass>NeavaMods.CompWeaponMods</compClass>
             </li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="TableMachining"]/thingClass</xpath>
+		<value>
+			<thingClass>NeavaMods.Building_TableMachining</thingClass>
 		</value>
 	</Operation>
 	

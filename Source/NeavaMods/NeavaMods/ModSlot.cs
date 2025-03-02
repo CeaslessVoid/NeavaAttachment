@@ -8,11 +8,11 @@ namespace NeavaMods
 {
     public class ModSlot
     {
-        public ModDef Mod;
+        public WeaponModDef Mod;
         public Polarity? Polarity;
 
         public ModSlot() { }
-        public ModSlot(ModDef mod, Polarity? polarity)
+        public ModSlot(WeaponModDef mod, Polarity? polarity)
         {
             Mod = mod;
             Polarity = polarity;

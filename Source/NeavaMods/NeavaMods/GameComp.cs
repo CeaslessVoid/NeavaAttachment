@@ -12,7 +12,7 @@ namespace NeavaMods
     {
         public static Settings Settings { get; private set; }
 
-        public static List<ModDef> ModDefs = new List<ModDef>();
+        public static List<WeaponModDef> ModDefs = new List<WeaponModDef>();
         public NeavaMods_GameComponent(Game game)
         {
             Settings = LoadedModManager.GetMod<NeavaMods_Mod>().GetSettings<Settings>();
@@ -20,14 +20,14 @@ namespace NeavaMods
 
         public static void InitOnNewGame()
         {
-            ModDefs = new List<ModDef>();
+            ModDefs = new List<WeaponModDef>();
         }
 
         public static void InitOnLoad()
         {
             if (ModDefs == null)
             {
-                ModDefs = new List<ModDef>();
+                ModDefs = new List<WeaponModDef>();
             }
 
             if (!ModDefs.Contains(NeavaModsDefOfs.Mod_Test))

@@ -11,7 +11,7 @@
     <showIfUndefined>false</showIfUndefined>
     <displayPriorityInCategory>5105</displayPriorityInCategory>
     <parts>
-      <li Class="NeavaMods.StatPart_Mods" />
+      <li Class="NeavaMods.StatPart_WeaponStatMod" />
     </parts>
   </StatDef>
 </Defs>

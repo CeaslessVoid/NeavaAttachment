@@ -24,5 +24,10 @@ namespace NeavaMods
             Log.Error("[Neava's Mods] " + ((o != null) ? o.ToString() : null));
         }
 
+        public static Window GetWeaponModGUI(Thing weapon, Thing gunsmithStation = null, Pawn owner = null, int? version = null)
+        {
+            return new Dialog_WeaponMod(weapon, gunsmithStation, owner);
+        }
+
     }
 }

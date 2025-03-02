@@ -69,10 +69,6 @@ namespace NeavaMods
                 postfix: new HarmonyMethod(typeof(HarmonyPatches), nameof(OnHitPreCheckMelee))
             );
 
-            //Main.HarmonyInstance.Patch(
-            //    original: AccessTools.Method(typeof(FloatMenuMakerMap), nameof(FloatMenuMakerMap.ChoicesAtFor)),
-            //    postfix: new HarmonyMethod(typeof(HarmonyPatches), nameof(AddModGuiOption))
-            //);
         }
 
         public static void OnHitPreCheckLaunch(Projectile __instance, Thing launcher, LocalTargetInfo usedTarget, LocalTargetInfo intendedTarget, ProjectileHitFlags hitFlags, bool preventFriendlyFire = false, Thing equipment = null)
@@ -92,7 +88,7 @@ namespace NeavaMods
 
                 if (__instance.Launcher is Pawn pawn && (pawn.Faction == Faction.OfPlayer || NeavaMods_GameComponent.Settings.enemyUseMods) && hitThing is Pawn pawn2)
                 {
-                    var compMods = equipment.TryGetComp<CompMods>();
+                    var compMods = equipment.TryGetComp<CompWeaponMods>();
 
                     if (compMods != null)
                     {
@@ -229,7 +225,7 @@ namespace NeavaMods
                 {
                     ThingWithComps weapon = __instance.EquipmentSource;
 
-                    var compMods = weapon.TryGetComp<CompMods>();
+                    var compMods = weapon.TryGetComp<CompWeaponMods>();
 
                     if (compMods != null)
                     {
@@ -253,19 +249,6 @@ namespace NeavaMods
             }
         }
 
-        public static void AddModGuiOption(List<FloatMenuOption> __instance, Vector3 clickPos, Pawn pawn, bool suppressAutoTakeableGoto)
-        {
-            //IntVec3 cell = IntVec3.FromVector3(clickPos);
-            //Thing thing = pawn.Map.thingGrid.ThingAt(cell, ThingCategory.Building);
-
-            //if (thing is Building_WorkTable workTable && workTable.def.defName == "TableMachining")
-            //{
-            //    __instance.Add(new FloatMenuOption("Open Mod GUI", () =>
-            //    {
-            //        ModUtils.Msg("Mod GUI opened (placeholder).");
-            //    }));
-            //}
-        }
     }
 
 }

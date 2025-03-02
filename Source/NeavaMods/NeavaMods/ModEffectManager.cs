@@ -17,8 +17,8 @@ namespace NeavaMods
 
     public enum ProcType
     {
-        OnHitPreCheck, // Damage Calc
-        OnHit, // After damage
+        OnHitPreCheck,
+        OnHit,
         OnKill
     }
 

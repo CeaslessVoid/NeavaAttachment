@@ -28,16 +28,5 @@ namespace NeavaMods
 
     }
 
-    //[StaticConstructorOnStartup]
-    //public static class DebugAttachmentDefs
-    //{
-    //    static DebugAttachmentDefs()
-    //    {
-    //        foreach (var def in DefDatabase<ModDef>.AllDefsListForReading)
-    //        {
-    //            Log.Message($"Loaded AttachmentDef: {def.defName}");
-    //        }
-    //    }
-    //}
 
 }

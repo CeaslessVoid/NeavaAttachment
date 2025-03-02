@@ -16,10 +16,10 @@ namespace NeavaMods
         {
 
             ThingWithComps weapon = (ThingWithComps)ThingMaker.MakeThing(ThingDef.Named("Gun_AssaultRifle"));
-            var comp = weapon.TryGetComp<CompMods>();
+            var comp = weapon.TryGetComp<CompWeaponMods>();
             if (comp != null)
             {
-                var testAttachment = DefDatabase<ModDef>.GetNamed("Mod_Test");
+                var testAttachment = DefDatabase<WeaponModDef>.GetNamed("Mod_Test");
                 comp.TryAddMod(1,testAttachment);
             }
             GenPlace.TryPlaceThing(weapon, UI.MouseCell(), Find.CurrentMap, ThingPlaceMode.Near);
@@ -31,10 +31,10 @@ namespace NeavaMods
         {
 
             ThingWithComps weapon = (ThingWithComps)ThingMaker.MakeThing(ThingDef.Named("MeleeWeapon_ZeusHammerBladelink"));
-            var comp = weapon.TryGetComp<CompMods>();
+            var comp = weapon.TryGetComp<CompWeaponMods>();
             if (comp != null)
             {
-                var testAttachment = DefDatabase<ModDef>.GetNamed("Mod_Test");
+                var testAttachment = DefDatabase<WeaponModDef>.GetNamed("Mod_Test");
                 comp.TryAddMod(1, testAttachment);
             }
             GenPlace.TryPlaceThing(weapon, UI.MouseCell(), Find.CurrentMap, ThingPlaceMode.Near);

@@ -5,7 +5,7 @@
 		<xpath>Defs/StatDef[defName="RangedWeapon_Cooldown"]</xpath>
 		<value>
 			<parts>
-				<li Class = "NeavaMods.StatPart_Mods" />
+				<li Class = "NeavaMods.StatPart_WeaponStatMod" />
 			</parts>
 		</value>
 	</Operation>
@@ -13,22 +13,15 @@
 	<Operation Class="PatchOperationAdd">
 		<xpath>Defs/StatDef[defName="MarketValue"]/parts</xpath>
 		<value>
-			<li Class = "NeavaMods.StatPart_Mods" />
+			<li Class = "NeavaMods.StatPart_WeaponStatMod" />
 		</value>
 	</Operation>
 
 	<Operation Class="PatchOperationAdd">
 		<xpath>Defs/StatDef[defName="MeleeWeapon_DamageMultiplier"]/parts</xpath>
 		<value>
-			<li Class = "NeavaMods.StatPart_Mods" />
+			<li Class = "NeavaMods.StatPart_WeaponStatMod" />
 		</value>
 	</Operation>
-
-	<Operation Class="PatchOperationAdd">
-		<xpath>/Defs/StatDef[defName="AimingDelayFactor"]/parts</xpath>
-		<value>
-			<li Class="NeavaMods.StatPart_Mods" />
-		</value>
-  	</Operation>
 
 </Patch>

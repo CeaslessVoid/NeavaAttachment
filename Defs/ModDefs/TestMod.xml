@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <NeavaMods.ModDef>
+  <NeavaMods.WeaponModDef>
     <defName>Mod_Test</defName>
     <label>Test Mod</label>
     <statOffsets>
         <RangedWeapon_Cooldown>-0.3</RangedWeapon_Cooldown>
-        <AimingDelayFactor>0.25</AimingDelayFactor>
         <MeleeWeapon_DamageMultiplier>0.25</MeleeWeapon_DamageMultiplier>
         <MarketValue>100</MarketValue>
     </statOffsets>
@@ -30,5 +29,5 @@
     
     <extensionClass>NeavaMods.DoubleDamageToMechsEffect</extensionClass>
 
-  </NeavaMods.ModDef>
+  </NeavaMods.WeaponModDef>
 </Defs>
