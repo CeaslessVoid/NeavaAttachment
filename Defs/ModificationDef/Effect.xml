@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <NeavaMods.ModEffectDef>
+        <defName>TestEffect</defName>
+        <label>TestLabel</label>
+        <description>TestDesc</description>
+
+        <statOffsets>
+            <RangedWeapon_Cooldown>-0.99</RangedWeapon_Cooldown>
+            <MeleeWeapon_DamageMultiplier>5</MeleeWeapon_DamageMultiplier>
+            <MarketValue>100</MarketValue>
+        </statOffsets>
+
+        <Tags>
+            <li>test</li>
+            <li>basic</li>
+        </Tags>
+
+        <Drain>1</Drain>
+    </NeavaMods.ModEffectDef>
+
+    <NeavaMods.ModEffectDef>
+        <defName>TestEffectt</defName>
+        <label>TestLabelII</label>
+        <description>TestDescII</description>
+
+        <statOffsets>
+            <MarketValue>200</MarketValue>
+        </statOffsets>
+
+        <Tags>
+            <li>test</li>
+            <li>basic</li>
+        </Tags>
+
+        <Drain>2</Drain>
+    </NeavaMods.ModEffectDef>
+
+    <NeavaMods.ModEffectDef>
+        <defName>TestEffecttt</defName>
+        <label>TestLabelIII</label>
+        <description>TestDesIII</description>
+
+        <statOffsets>
+            <MarketValue>300</MarketValue>
+        </statOffsets>
+
+        <Tags>
+            <li>test</li>
+            <li>basic</li>
+        </Tags>
+
+        <Drain>3</Drain>
+    </NeavaMods.ModEffectDef>
+
+</Defs>

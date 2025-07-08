@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <NeavaMods.ModificationDef Name="NeavaWeaponModBase" Abstract="True">
+        <statBases>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Mass>0.5</Mass>
+            <Flammability>0</Flammability>
+        </statBases>
+        <thingCategories>
+            <li>ItemsMisc</li>
+        </thingCategories>
+        <stackLimit>1</stackLimit>
+        <tradeNeverGenerateStacked>true</tradeNeverGenerateStacked>
+        <category>Item</category>
+        <drawerType>MapMeshOnly</drawerType>
+        <resourceReadoutPriority>Middle</resourceReadoutPriority>
+        <selectable>true</selectable>
+        <altitudeLayer>Item</altitudeLayer>
+        <alwaysHaulable>true</alwaysHaulable>
+        <rotatable>false</rotatable>
+        <healthAffectsPrice>false</healthAffectsPrice>
+        <pathCost>14</pathCost>
+        <comps>
+            <li Class="CompProperties_Forbiddable"/>
+        </comps>
+    </NeavaMods.ModificationDef>
+
+    <NeavaMods.ModificationDef ParentName="NeavaWeaponModBase">
+        <defName>WeaponModBasic</defName>
+        <!--  -->
+        <label>weapon mod</label>
+        <description>A weapon modification that can be installed into a weapon at the weapon modification table. To use a weapon mod, it must be placed near the weapon modification table.</description>
+        <!--  -->
+                                                                                <!-- <effectDef>TestEffect</effectDef> -->
+        <tickerType>Never</tickerType>
+        <useHitPoints>true</useHitPoints>
+        <canDeteriorateUnspawned>true</canDeteriorateUnspawned>
+        <deteriorateFromEnvironmentalEffects>false</deteriorateFromEnvironmentalEffects>
+
+        <statBases>
+          <MarketValue>0</MarketValue>
+        </statBases>
+
+        <Tags>
+            <li>basic</li>
+        </Tags>
+
+        <graphicData>
+            <texPath>Things/WeaponModBasic</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(0.85, 0.85)</drawSize>
+        </graphicData>
+
+
+
+        <thingClass>NeavaMods.WeaponModComp</thingClass>
+    </NeavaMods.ModificationDef>
+</Defs>

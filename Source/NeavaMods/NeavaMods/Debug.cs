@@ -1,5 +1,4 @@
 ﻿using LudeonTK;
-using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,38 +8,36 @@ using Verse;
 
 namespace NeavaMods
 {
-    public static class Debug
+    public class Debug
     {
-        [DebugAction(null, null, false, false, false, false, 0, false, category = CATEGORY, name = "TestSPawnAssultRifle", requiresRoyalty = false, requiresIdeology = false, requiresBiotech = false, actionType = 0, allowedGameStates = LudeonTK.AllowedGameStates.Playing)]
-        private static void TestSpawnAssultRifle()
+        [DebugAction("NeavaMods", "Spawn WeaponModBasic with TestEffect", allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        public static void SpawnWeaponModWithEffect()
         {
-
-            ThingWithComps weapon = (ThingWithComps)ThingMaker.MakeThing(ThingDef.Named("Gun_AssaultRifle"));
-            var comp = weapon.TryGetComp<CompWeaponMods>();
-            if (comp != null)
+            Map map = Find.CurrentMap;
+            if (map == null)
             {
-                var testAttachment = DefDatabase<WeaponModDef>.GetNamed("Mod_Test");
-                comp.TryAddMod(1,testAttachment);
+                ModUtils.Error("No current map to spawn item.");
+                return;
             }
-            GenPlace.TryPlaceThing(weapon, UI.MouseCell(), Find.CurrentMap, ThingPlaceMode.Near);
-            Messages.Message("Spawned an Assault Rifle with the Test Mod!", MessageTypeDefOf.TaskCompletion, false);
-        }
 
-        [DebugAction(null, null, false, false, false, false, 0, false, category = CATEGORY, name = "TestSPawnZeusHammer", requiresRoyalty = false, requiresIdeology = false, requiresBiotech = false, actionType = 0, allowedGameStates = LudeonTK.AllowedGameStates.Playing)]
-        private static void TestSpawnSword()
-        {
+            IntVec3 pos = UI.MouseCell();
 
-            ThingWithComps weapon = (ThingWithComps)ThingMaker.MakeThing(ThingDef.Named("MeleeWeapon_ZeusHammerBladelink"));
-            var comp = weapon.TryGetComp<CompWeaponMods>();
-            if (comp != null)
+            Thing modThing = ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamed("WeaponModBasic", errorOnFail: false));
+
+            if (modThing is WeaponModComp weaponMod)
             {
-                var testAttachment = DefDatabase<WeaponModDef>.GetNamed("Mod_Test");
-                comp.TryAddMod(1, testAttachment);
+                if (weaponMod.effect == null)
+                {
+                    ModUtils.Warn("WeaponModBasic spawned with null effect. Aborting spawn.");
+                    return;
+                }
             }
-            GenPlace.TryPlaceThing(weapon, UI.MouseCell(), Find.CurrentMap, ThingPlaceMode.Near);
-            Messages.Message("Spawned an ZeusHammer with the Test Mod!", MessageTypeDefOf.TaskCompletion, false);
-        }
+            else
+            {
+                ModUtils.Warn("Spawned thing is not a WeaponModComp.");
+            }
 
-        private const string CATEGORY = "Neava's Weapon Mods";
+            GenPlace.TryPlaceThing(modThing, pos, map, ThingPlaceMode.Near);
+        }
     }
 }

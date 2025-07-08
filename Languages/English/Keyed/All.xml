@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-    <ApplyWeaponMods>Apply Weapon Mods to {0}</ApplyWeaponMods>
-    <noWeaponModComp>Weapon cannot be modded</noWeaponModComp>
-
+    <Drain>Drain: {0}</Drain>
+    
 </LanguageData>

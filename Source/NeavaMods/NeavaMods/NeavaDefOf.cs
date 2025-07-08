@@ -4,15 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Verse;
 
 namespace NeavaMods
 {
     [DefOf]
-    public static class NeavaModsDefOfs
+    public class NeavaDefOf
     {
-        public static WeaponModDef Mod_Test;
-
-        public static JobDef ApplyWeaponMods;
+        public static ModEffectDef TestEffect;
     }
 }
