@@ -11,5 +11,7 @@ namespace NeavaMods
     public class NeavaDefOf
     {
         public static ModEffectDef TestEffect;
+
+        public static ModEffectDef TestEffectt;
     }
 }

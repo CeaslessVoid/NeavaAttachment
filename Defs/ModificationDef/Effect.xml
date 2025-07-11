@@ -11,6 +11,11 @@
             <MarketValue>100</MarketValue>
         </statOffsets>
 
+        <Extensions>
+            <li>NeavaMods.EffectExtensions.TestEffects1</li>
+            <li>NeavaMods.EffectExtensions.TestEffects2</li>
+        </Extensions>
+
         <Tags>
             <li>test</li>
             <li>basic</li>
@@ -28,6 +33,11 @@
             <MarketValue>200</MarketValue>
         </statOffsets>
 
+        <Extensions>
+            <li>NeavaMods.EffectExtensions.TestEffects3</li>
+            <li>NeavaMods.EffectExtensions.TestEffects2</li>
+        </Extensions>
+    
         <Tags>
             <li>test</li>
             <li>basic</li>

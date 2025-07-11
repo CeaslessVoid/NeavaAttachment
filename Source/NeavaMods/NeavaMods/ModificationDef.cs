@@ -20,6 +20,7 @@ namespace NeavaMods
 
         [NoTranslate]
         public List<string> TagsAny;
+
     }
 
     public class ModEffectDef : Def
@@ -30,6 +31,8 @@ namespace NeavaMods
 
         [NoTranslate]
         public List<string> Tags;
+
+        public List<string> Extensions;
 
         [Unsaved]
         public Dictionary<StatDef, float> statOffsetDict;
@@ -54,7 +57,5 @@ namespace NeavaMods
                 }
             }
         }
-
-
     }
 }
