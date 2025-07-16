@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using Verse;
 
 namespace NeavaMods
@@ -27,6 +28,10 @@ namespace NeavaMods
     {
         public List<StatModifier> statOffsets;
 
+        public List<StatModifier> statFactors;
+
+        public List<StatModifier> equippedStatOffsets;
+
         public int Drain;
 
         [NoTranslate]
@@ -37,9 +42,27 @@ namespace NeavaMods
         [Unsaved]
         public Dictionary<StatDef, float> statOffsetDict;
 
+        [NoTranslate]
+        public string colorHex;
+
+        [Unsaved]
+        public Color? color;
+
         public override void ResolveReferences()
         {
             base.ResolveReferences();
+
+            if (!string.IsNullOrEmpty(colorHex))
+            {
+                try
+                {
+                    color = GenColor.FromHex(colorHex);
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"[NeavaMods] Failed to parse color '{colorHex}' in {defName}: {e.Message}");
+                }
+            }
 
             if (statOffsets != null && statOffsets.Count > 0)
             {

@@ -16,13 +16,15 @@ using static NeavaMods.CompProperties_WeaponModContainer;
 
 namespace NeavaMods
 {
-    public class ProjectileInfoExteder : GameComponent
+    public class ProjectileInfoExtender : GameComponent
     {
         public static Dictionary<Projectile, Thing> projectileEquipment = new Dictionary<Projectile, Thing>();
 
         public static readonly Dictionary<Thing /*victim*/, Thing /*equipment*/> VictimToEquip = new Dictionary<Thing, Thing>();
 
-        public ProjectileInfoExteder(Game game)
+        public static readonly Dictionary<Thing /*victim*/, Thing /*equipment*/> VictimToEquipPost = new Dictionary<Thing, Thing>();
+
+        public ProjectileInfoExtender(Game game)
         {
 
         }
@@ -44,7 +46,10 @@ namespace NeavaMods
             VictimToEquip[victim] = equip;
         }
 
-
+        public static void RegisterVictimPost(Thing victim, Thing equip)
+        {
+            VictimToEquipPost[victim] = equip;
+        }
 
         public static void Remove(Projectile projectile)
         {
@@ -54,6 +59,11 @@ namespace NeavaMods
         public static void RemveVictim(Thing victim)
         {
             VictimToEquip.Remove(victim);
+        }
+
+        public static void RemoveVictimPost(Thing victim)
+        {
+            VictimToEquipPost.Remove(victim);
         }
 
     }
@@ -90,33 +100,43 @@ namespace NeavaMods
             //    postfix: new HarmonyMethod(typeof(HarmonyPatches), nameof(Verb_MeleeAttackDamage_Patch))
             //);
 
-            //Main.HarmonyInstance.Patch(
-            //    original: AccessTools.Method(typeof(Verb_MeleeAttackDamage), "ApplyMeleeDamageToTarget"),
-            //    prefix: new HarmonyMethod(typeof(HarmonyPatches), nameof(Verb_MeleeAttackDamage_AfterPatch))
-            //);
+            Main.HarmonyInstance.Patch(
+                original: AccessTools.Method(typeof(Verb_MeleeAttackDamage), "ApplyMeleeDamageToTarget"),
+                prefix: new HarmonyMethod(typeof(HarmonyPatches), nameof(Verb_MeleeAttackDamage_Patch))
+            );
 
-            //Main.HarmonyInstance.Patch(
-            //    original: AccessTools.Method(typeof(Thing), "PostApplyDamage"),
-            //    postfix: new HarmonyMethod(typeof(HarmonyPatches), nameof(Verb_ThingPostApplyDamage_Patch))
-            //);
+            Main.HarmonyInstance.Patch(
+                original: AccessTools.Method(typeof(Thing), "PreApplyDamage"),
+                postfix: new HarmonyMethod(typeof(HarmonyPatches), nameof(Verb_ThingPreApplyDamage_Patch))
+            );
+
+            Main.HarmonyInstance.Patch(
+                original: AccessTools.Method(typeof(Thing), "PostApplyDamage"),
+                postfix: new HarmonyMethod(typeof(HarmonyPatches), nameof(Verb_ThingPostApplyDamage_Patch))
+            );
         }
 
 
         public static void OnHitPreCheckLaunch(Projectile __instance, Thing launcher, LocalTargetInfo usedTarget, LocalTargetInfo intendedTarget, ProjectileHitFlags hitFlags, bool preventFriendlyFire = false, Thing equipment = null)
         {
-            
-            if (launcher is Pawn pawn && equipment.TryGetComp<CompWeaponModContainer>() != null)
+
+            if (launcher is Pawn pawn && equipment != null && equipment.TryGetComp<CompWeaponModContainer>() != null)
             {
-                ProjectileInfoExteder.SetEquipment(__instance, equipment);
+                ProjectileInfoExtender.SetEquipment(__instance, equipment);
             }
         }
 
         public static bool ProjectileImpact_Patch(Bullet __instance, Thing hitThing, bool blockedByShield = false)
         {
-            if (ProjectileInfoExteder.projectileEquipment.TryGetValue(__instance, out Thing equipment))
+            if (ProjectileInfoExtender.projectileEquipment.TryGetValue(__instance, out Thing equipment))
             {
-                ProjectileInfoExteder.Remove(__instance);
-                ProjectileInfoExteder.RegisterVictim(hitThing, equipment);
+                ProjectileInfoExtender.Remove(__instance);
+
+                if (hitThing != null)
+                {
+                    ProjectileInfoExtender.RegisterVictim(hitThing, equipment);
+                    return true;
+                }
             }
 
             return true;
@@ -281,20 +301,39 @@ namespace NeavaMods
         //        }
         //    }
         //}
-        
-        public static void Verb_ThingPostApplyDamage_Patch(Thing __instance, DamageInfo dinfo, float totalDamageDealt)
-        {
-            // Thing here is the target being hit
 
-            if (ProjectileInfoExteder.VictimToEquip.TryGetValue(__instance, out Thing equipment))
+        public static void Verb_ThingPreApplyDamage_Patch(Thing __instance, ref DamageInfo dinfo, ref bool absorbed)
+        {
+            if (ProjectileInfoExtender.VictimToEquip.TryGetValue(__instance, out Thing equipment))
             {
-                ProjectileInfoExteder.RemveVictim(__instance);
+                ProjectileInfoExtender.RemveVictim(__instance);
+                ProjectileInfoExtender.RegisterVictimPost(__instance, equipment);
 
                 var compMods = equipment.TryGetComp<CompWeaponModContainer>();
 
                 if (compMods != null)
                 {
-                    foreach (PostHit effect in compMods.GetEffectsOfType<PostHit>(EffectCategory.PostHit))
+                    foreach (PreHit effect in compMods.GetEffectsOfType<PreHit>(EffectCategory.PreApplyDamage))
+                    {
+                        effect.Apply((Pawn)dinfo.Instigator, __instance, ref dinfo);
+                    }
+                }
+            }
+        }
+
+        public static void Verb_ThingPostApplyDamage_Patch(Thing __instance, DamageInfo dinfo, float totalDamageDealt)
+        {
+            // Thing here is the target being hit
+
+            if (ProjectileInfoExtender.VictimToEquipPost.TryGetValue(__instance, out Thing equipment))
+            {
+                ProjectileInfoExtender.RemoveVictimPost(__instance);
+
+                var compMods = equipment.TryGetComp<CompWeaponModContainer>();
+
+                if (compMods != null)
+                {
+                    foreach (PostHit effect in compMods.GetEffectsOfType<PostHit>(EffectCategory.PostApplyDamage))
                     {
                         effect.Apply((Pawn)dinfo.Instigator, __instance, dinfo, totalDamageDealt);
                     }
@@ -310,6 +349,20 @@ namespace NeavaMods
                 }
 
             }
+        }
+
+        public static bool Verb_MeleeAttackDamage_Patch(Verb_MeleeAttackDamage __instance, LocalTargetInfo target)
+        {
+            ThingWithComps weapon = __instance.EquipmentSource;
+            Pawn attacker = __instance.CasterPawn;
+            Thing victim = target.Thing;
+
+            if (weapon != null && attacker != null && victim != null && weapon.TryGetComp<CompWeaponModContainer>() != null)
+            {
+                ProjectileInfoExtender.RegisterVictim(victim, weapon);
+            }
+
+            return true;
         }
     }
 }

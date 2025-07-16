@@ -12,98 +12,65 @@ namespace NeavaMods
 {
     public class Debug
     {
-        //[DebugAction("NeavaMods", "Spawn WeaponModBasic with TestEffect", allowedGameStates = AllowedGameStates.PlayingOnMap)]
-        //public static void SpawnWeaponModWithEffect()
-        //{
-        //    Map map = Find.CurrentMap;
-        //    if (map == null)
-        //    {
-        //        ModUtils.Error("No current map to spawn item.");
-        //        return;
-        //    }
+        [DebugAction("NeavaMods", "Spawn Bolt-Action Rifle with TestEffect", allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        public static void SpawnBoltActionWithTestEffect()
+        {
+            Map map = Find.CurrentMap;
+            if (map == null)
+            {
+                ModUtils.Error("No current map found.");
+                return;
+            }
 
-        //    IntVec3 pos = UI.MouseCell();
+            IntVec3 pos = UI.MouseCell();
 
-        //    Thing modThing = ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamed("WeaponModBasic", errorOnFail: false));
+            ThingDef rifleDef = DefDatabase<ThingDef>.GetNamed("Gun_BoltActionRifle", errorOnFail: false);
+            Thing rifle = ThingMaker.MakeThing(rifleDef);
 
-        //    if (modThing is WeaponModComp weaponMod)
-        //    {
-        //        if (weaponMod.effect == null)
-        //        {
-        //            ModUtils.Warn("WeaponModBasic spawned with null effect. Aborting spawn.");
-        //            return;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        ModUtils.Warn("Spawned thing is not a WeaponModComp.");
-        //    }
+            var modComp = rifle.TryGetComp<CompWeaponModContainer>();
 
-        //    GenPlace.TryPlaceThing(modThing, pos, map, ThingPlaceMode.Near);
-        //}
+            if (NeavaDefOf.TestEffect == null)
+            {
+                ModUtils.Error("TestEffect not found in NeavaDefOf.");
+                return;
+            }
 
-        //[DebugAction("NeavaMods", "Spawn Bolt-Action Rifle with TestEffect", allowedGameStates = AllowedGameStates.PlayingOnMap)]
-        //public static void SpawnBoltActionWithTestEffect()
-        //{
-        //    Map map = Find.CurrentMap;
-        //    if (map == null)
-        //    {
-        //        ModUtils.Error("No current map found.");
-        //        return;
-        //    }
+            modComp.AddMod(NeavaDefOf.TestEffect);
 
-        //    IntVec3 pos = UI.MouseCell();
+            modComp.CacheEffects();
 
-        //    ThingDef rifleDef = DefDatabase<ThingDef>.GetNamed("Gun_BoltActionRifle", errorOnFail: false);
-        //    Thing rifle = ThingMaker.MakeThing(rifleDef);
+            GenPlace.TryPlaceThing(rifle, pos, map, ThingPlaceMode.Near);
+        }
 
-        //    var modComp = rifle.TryGetComp<CompWeaponModContainer>();
+        [DebugAction("NeavaMods", "Give Longsword with TestEffectt", allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        public static void GiveLongswordWithTestEffect()
+        {
+            Map map = Find.CurrentMap;
+            if (map == null)
+            {
+                ModUtils.Error("No current map found.");
+                return;
+            }
 
-        //    if (NeavaDefOf.TestEffect == null)
-        //    {
-        //        ModUtils.Error("TestEffect not found in NeavaDefOf.");
-        //        return;
-        //    }
+            IntVec3 pos = UI.MouseCell();
 
-        //    modComp.modSlots.Add(NeavaDefOf.TestEffect);
+            ThingDef rifleDef = DefDatabase<ThingDef>.GetNamed("MeleeWeapon_LongSword", errorOnFail: false);
+            Thing rifle = ThingMaker.MakeThing(rifleDef);
 
-        //    modComp.CacheEffects();
+            var modComp = rifle.TryGetComp<CompWeaponModContainer>();
 
-        //    GenPlace.TryPlaceThing(rifle, pos, map, ThingPlaceMode.Near);
-        //}
+            if (NeavaDefOf.TestEffect == null)
+            {
+                ModUtils.Error("TestEffect not found in NeavaDefOf.");
+                return;
+            }
 
-        //public static class DebugWeaponSpawner
-        //{
-        //    [DebugAction("NeavaMods", "Give Longsword with TestEffectt", actionType = DebugActionType.Action)]
-        //    public static void GiveLongswordWithTestEffect()
-        //    {
-        //        Map map = Find.CurrentMap;
-        //        if (map == null)
-        //        {
-        //            ModUtils.Error("No current map found.");
-        //            return;
-        //        }
+            modComp.AddMod(NeavaDefOf.TestEffectt);
 
-        //        IntVec3 pos = UI.MouseCell();
+            modComp.CacheEffects();
 
-        //        ThingDef rifleDef = DefDatabase<ThingDef>.GetNamed("MeleeWeapon_LongSword", errorOnFail: false);
-        //        Thing rifle = ThingMaker.MakeThing(rifleDef);
-
-        //        var modComp = rifle.TryGetComp<CompWeaponModContainer>();
-
-        //        if (NeavaDefOf.TestEffect == null)
-        //        {
-        //            ModUtils.Error("TestEffect not found in NeavaDefOf.");
-        //            return;
-        //        }
-
-        //        modComp.modSlots.Add(NeavaDefOf.TestEffectt);
-
-        //        modComp.CacheEffects();
-
-        //        GenPlace.TryPlaceThing(rifle, pos, map, ThingPlaceMode.Near);
-        //    }
-        //}
+            GenPlace.TryPlaceThing(rifle, pos, map, ThingPlaceMode.Near);
+        }
 
     }
 }

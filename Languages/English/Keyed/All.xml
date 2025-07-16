@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
+    <StatsReport_WeaponMods>Weapon Modifications</StatsReport_WeaponMods>
+    <Stat_ThingWeaponMods_Desc>This weapon's modifications.</Stat_ThingWeaponMods_Desc>
+    <Stat_ThingWeaponMods_Label>Weapon Modifications</Stat_ThingWeaponMods_Label>
     <Drain>Drain: {0}</Drain>
     
 </LanguageData>

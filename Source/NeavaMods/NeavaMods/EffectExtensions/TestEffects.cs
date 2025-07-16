@@ -8,12 +8,13 @@ using Verse;
 
 namespace NeavaMods.EffectExtensions
 {
-    public class TestEffects1 : RangePreHit
+    public class TestEffects1 : PreHit
     {
-        public override void Apply(Pawn shooter, Thing victim, ref Projectile projectile, ref float damageMod)
+        public override void Apply(Pawn shooter, Thing victim, ref DamageInfo dinfo)
         {
             ModUtils.Msg("PreHitApplied");
-            damageMod += 10;
+
+            dinfo.SetAmount(dinfo.Amount * 10);
         }
     }
 
@@ -27,12 +28,12 @@ namespace NeavaMods.EffectExtensions
         }
     }
 
-    public class TestEffects3 : MeleePreHit
+    public class TestEffects3 : PreHit
     {
-        public override void Apply(Pawn attacker, Thing victim, ref Verb_MeleeAttackDamage verb, ref DamageInfo dinfo, ref float damageMod)
+        public override void Apply(Pawn shooter, Thing victim, ref DamageInfo dinfo)
         {
             ModUtils.Msg("PreHitApplied");
-            damageMod += 10;
+            dinfo.SetAmount(dinfo.Amount * 10);
         }
     }
 

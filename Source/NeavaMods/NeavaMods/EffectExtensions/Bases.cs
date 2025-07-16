@@ -14,23 +14,30 @@ namespace NeavaMods.EffectExtensions
         public virtual EffectCategory Category => throw new NotImplementedException();
     }
 
-    public abstract class RangePreHit : BaseModEffect
+    //public abstract class RangePreHit : BaseModEffect
+    //{
+    //    public override EffectCategory Category => EffectCategory.RangePreHit;
+
+    //    public virtual void Apply(Pawn shooter, Thing victim, ref Projectile projectile, ref float damageMod) { }
+    //}
+
+    //public abstract class MeleePreHit : BaseModEffect
+    //{
+    //    public override EffectCategory Category => EffectCategory.MeleePreHit;
+
+    //    public virtual void Apply(Pawn attacker, Thing victim, ref Verb_MeleeAttackDamage verb, ref DamageInfo dinfo, ref float damageMod) { }
+    //}
+
+    public abstract class PreHit : BaseModEffect
     {
-        public override EffectCategory Category => EffectCategory.RangePreHit;
+        public override EffectCategory Category => EffectCategory.PreApplyDamage;
 
-        public virtual void Apply(Pawn shooter, Thing victim, ref Projectile projectile, ref float damageMod) { }
-    }
-
-    public abstract class MeleePreHit : BaseModEffect
-    {
-        public override EffectCategory Category => EffectCategory.MeleePreHit;
-
-        public virtual void Apply(Pawn attacker, Thing victim, ref Verb_MeleeAttackDamage verb, ref DamageInfo dinfo, ref float damageMod) { }
+        public virtual void Apply(Pawn attacker, Thing victim, ref DamageInfo dinfo) { }
     }
 
     public abstract class PostHit : BaseModEffect
     {
-        public override EffectCategory Category => EffectCategory.PostHit;
+        public override EffectCategory Category => EffectCategory.PostApplyDamage;
 
         public virtual void Apply(Pawn attacker, Thing victim, DamageInfo dinfo, float totalDamageDealt) { }
     }
@@ -44,9 +51,8 @@ namespace NeavaMods.EffectExtensions
 
     public enum EffectCategory
     {
-        RangePreHit,
-        MeleePreHit,
-        PostHit,
+        PreApplyDamage,
+        PostApplyDamage,
         OnKill,
     }
 
