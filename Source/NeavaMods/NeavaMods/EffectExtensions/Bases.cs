@@ -9,9 +9,13 @@ using Verse;
 namespace NeavaMods.EffectExtensions
 {
 
-    public abstract class BaseModEffect
+    public abstract class BaseModEffect : IExposable
     {
         public virtual EffectCategory Category => throw new NotImplementedException();
+
+        public virtual void ExposeData()
+        {
+        }
     }
 
     //public abstract class RangePreHit : BaseModEffect
