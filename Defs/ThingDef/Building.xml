@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <ThingDef ParentName="BuildingBase">
+        <defName>ModificationStation</defName>
+        <label>modification station</label>
+        <description>This machine can infuse modifications into the weapon that is placed on this station. Weapon modifications must placed close to this station for it to be a target. Once a weapon modification is infused into the weapon, it cannot be extracted cleanly.</description>
+        <!-- <thingClass></thingClass> -->
+        <graphicData>
+            <texPath>Things/Building/ModificationStation</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+            <shadowData>
+                <volume>(1.9,0.6,1.9)</volume>
+            </shadowData>
+            <drawSize>2.46875</drawSize>
+        </graphicData>
+        <uiIconScale>0.85</uiIconScale>
+        <drawerType>MapMeshAndRealTime</drawerType>
+        <drawGUIOverlay>true</drawGUIOverlay>
+
+        <size>(2,2)</size>
+        <rotatable>true</rotatable>
+        <altitudeLayer>Building</altitudeLayer>
+        <passability>PassThroughOnly</passability>
+        <castEdgeShadows>true</castEdgeShadows>
+        <fillPercent>0.5</fillPercent>
+        <canOverlapZones>false</canOverlapZones>
+        <selectable>true</selectable>
+        <thingCategories>
+            <li>BuildingsMisc</li>
+        </thingCategories>
+
+        <costList>
+            <Steel>250</Steel>
+            <Plasteel>75</Plasteel>
+            <ComponentSpacer>1</ComponentSpacer>
+        </costList>
+        <researchPrerequisites>
+            <li>MicroelectronicsBasics</li>
+        </researchPrerequisites>
+        <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+        <inspectorTabs>
+            <li>ITab_Storage</li>
+        </inspectorTabs>
+        <statBases>
+            <MaxHitPoints>300</MaxHitPoints>
+            <WorkToBuild>25000</WorkToBuild>
+            <Mass>75</Mass>
+            <Flammability>0.1</Flammability>
+        </statBases>
+
+        <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+
+        <hasInteractionCell>true</hasInteractionCell>
+        <building>
+            <destroySound>BuildingDestroyed_Metal_Big</destroySound>
+        </building>
+
+        <designationCategory>Misc</designationCategory>
+        <minifiedDef>MinifiedThing</minifiedDef>
+    </ThingDef>
+</Defs>
