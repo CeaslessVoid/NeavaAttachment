@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,9 @@ namespace NeavaMods
         {
             Main.HarmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
 
+
         }
-
         public static Harmony HarmonyInstance = new Harmony("Neava.WeaponMods.Base");
-
 
         public static bool IsCEActive()
         {

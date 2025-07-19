@@ -4,20 +4,20 @@
         <defName>ModificationStation</defName>
         <label>modification station</label>
         <description>This machine can infuse modifications into the weapon that is placed on this station. Weapon modifications must placed close to this station for it to be a target. Once a weapon modification is infused into the weapon, it cannot be extracted cleanly.</description>
-        <!-- <thingClass></thingClass> -->
+        <thingClass>NeavaMods.Building_WeaponMod</thingClass>
         <graphicData>
             <texPath>Things/Building/ModificationStation</texPath>
             <graphicClass>Graphic_Multi</graphicClass>
             <shadowData>
-                <volume>(1.9,0.6,1.9)</volume>
+                <volume>(0.9,0.6,9.9)</volume>
             </shadowData>
-            <drawSize>2.46875</drawSize>
+            <drawSize>1.23437</drawSize>
         </graphicData>
         <uiIconScale>0.85</uiIconScale>
         <drawerType>MapMeshAndRealTime</drawerType>
         <drawGUIOverlay>true</drawGUIOverlay>
 
-        <size>(2,2)</size>
+        <size>(1,1)</size>
         <rotatable>true</rotatable>
         <altitudeLayer>Building</altitudeLayer>
         <passability>PassThroughOnly</passability>
@@ -54,6 +54,19 @@
         <building>
             <destroySound>BuildingDestroyed_Metal_Big</destroySound>
         </building>
+
+        <comps>
+            <li Class="CompProperties_Power">
+                <compClass>CompPowerTrader</compClass>
+                <basePowerConsumption>250</basePowerConsumption>
+            </li>
+            <li Class="CompProperties_Flickable"/>
+            <li Class="CompProperties_ThingContainer">
+                <compClass>NeavaMods.CompWeaponContainer</compClass>
+                <containedThingOffset>(0,0,0)</containedThingOffset>
+                <stackLimit>1</stackLimit>
+            </li>
+        </comps>
 
         <designationCategory>Misc</designationCategory>
         <minifiedDef>MinifiedThing</minifiedDef>

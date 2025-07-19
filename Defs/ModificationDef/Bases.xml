@@ -51,8 +51,6 @@
             <drawSize>(0.85, 0.85)</drawSize>
         </graphicData>
 
-
-
         <thingClass>NeavaMods.WeaponModComp</thingClass>
     </NeavaMods.ModificationDef>
 </Defs>

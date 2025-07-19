@@ -60,7 +60,7 @@ namespace NeavaMods
                 }
                 catch (Exception e)
                 {
-                    Log.Error($"[NeavaMods] Failed to parse color '{colorHex}' in {defName}: {e.Message}");
+                    Log.Error($"Failed to parse color '{colorHex}' in {defName}: {e.Message}");
                 }
             }
 
