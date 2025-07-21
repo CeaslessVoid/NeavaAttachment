@@ -29,21 +29,6 @@ namespace NeavaMods
             return ("Contents".Translate() + ": " + label).Trim();
         }
 
-        public override void PostDraw()
-        {
-            base.PostDraw();
-
-            var modStation = parent as Building_WeaponMod;
-            if (modStation?.HoldingItem != null)
-            {
-                Thing weapon = modStation.HoldingItem;
-                Vector3 drawPos = parent.DrawPos + new Vector3(0.5f, 0f, 0.5f);
-                drawPos.y = AltitudeLayer.Item.AltitudeFor();
-
-                weapon.DrawAt(drawPos);
-            }
-        }
-
     }
 
     public class Building_WeaponMod : Building
@@ -146,26 +131,23 @@ namespace NeavaMods
         public override IEnumerable<Gizmo> GetGizmos()
         {
             List<Gizmo> list = Enumerable.ToList<Gizmo>(base.GetGizmos());
-            //list.Add(CreateReinforceGizmo());
+            list.Add(CreateModifyGizmo());
             list.Add(CreateExtractItemGizmo());
 
             return list;
         }
 
-        //protected Gizmo CreateReinforceGizmo()
-        //{
-        //    return new Command_Action
-        //    {
-        //        icon = IconCache.EquipmentReinforce,
-        //        defaultLabel = Keyed.Reinforce,
-        //        defaultDesc = Keyed.ReinforceDesc,
-        //        Disabled = (!this.PowerOn || this.HoldingItem == null),
-        //        action = delegate ()
-        //        {
-        //            Dialog_Reinforcer.ToggleWindow(this);
-        //        }
-        //    };
-        //}
+        protected Gizmo CreateModifyGizmo()
+        {
+            return new Command_Action
+            {
+                Disabled = (!PowerOn || HoldingItem == null),
+                action = delegate ()
+                {
+                    Window_WeaponMod.ToggleWindow(this);
+                }
+            };
+        }
 
         protected Gizmo CreateExtractItemGizmo()
         {
@@ -215,18 +197,4 @@ namespace NeavaMods
         }
     }
 
-    public class Building_WeaponMod_Comparer : IEqualityComparer<Building_WeaponMod>
-    {
-        public bool Equals(Building_WeaponMod x, Building_WeaponMod y)
-        {
-            return x.def == y.def;
-        }
-
-        public int GetHashCode(Building_WeaponMod obj)
-        {
-            return base.GetHashCode();
-        }
-
-
-    }
 }
