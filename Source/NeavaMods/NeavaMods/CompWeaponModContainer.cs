@@ -1,4 +1,5 @@
 ﻿using NeavaMods.EffectExtensions;
+using NeavaMods.Timed;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -43,10 +44,11 @@ namespace NeavaMods
             {
                 base.PostExposeData();
                 Scribe_Collections.Look(ref modSlots, "modSlots", LookMode.Def);
-
+                Scribe_Collections.Look(ref activeBuffs, "activeBuffs", LookMode.Value, LookMode.Deep);
                 if (Scribe.mode == LoadSaveMode.PostLoadInit)
                 {
                     CacheEffects();
+                    RebuildExpirySchedule();
                 }
             }
 
@@ -204,6 +206,111 @@ namespace NeavaMods
                 }
                 return "Stat_ThingWeaponMods_Label".Translate() + ": " + (from x in this.ModsSlotsListForReading where x != null select x.label).ToCommaList(false, false).CapitalizeFirst();
             }
+
+            // Buff Tracker
+            private Dictionary<string, TimedBuff> activeBuffs = new();
+            private SortedList<int, List<string>> expirySchedule = new();
+
+            private int lastCleanupTick = 0;
+            private const int CleanupInterval = 60000;
+
+            private void RebuildExpirySchedule()
+            {
+                expirySchedule.Clear();
+                foreach (var kvp in activeBuffs)
+                {
+                    var buff = kvp.Value;
+                    if (!expirySchedule.TryGetValue(buff.expireTick, out var list))
+                    {
+                        list = new List<string>();
+                        expirySchedule[buff.expireTick] = list;
+                    }
+                    list.Add(buff.id);
+                }
+            }
+
+            public void AddBuff(string id, int durationTicks, float power)
+            {
+                int expireTick = Find.TickManager.TicksGame + durationTicks;
+
+                if (activeBuffs.TryGetValue(id, out var existing))
+                {
+                    RemoveBuff(id);
+                }
+
+                var buff = new TimedBuff
+                {
+                    id = id,
+                    power = power,
+                    expireTick = expireTick
+                };
+
+                activeBuffs[id] = buff;
+
+                if (!expirySchedule.TryGetValue(expireTick, out var list))
+                {
+                    list = new List<string>();
+                    expirySchedule[expireTick] = list;
+                }
+                list.Add(id);
+            }
+
+            public float GetBuffPower(string id)
+            {
+                int now = Find.TickManager.TicksGame;
+
+                if (activeBuffs.TryGetValue(id, out var buff))
+                {
+                    if (buff.expireTick < now)
+                    {
+                        RemoveBuff(id);
+                        return 0f;
+                    }
+                    return buff.power;
+                }
+                return 0f;
+            }
+
+            public void RemoveBuff(string id)
+            {
+                if (!activeBuffs.TryGetValue(id, out var buff))
+                    return;
+
+                activeBuffs.Remove(id);
+
+                if (expirySchedule.TryGetValue(buff.expireTick, out var list))
+                {
+                    list.Remove(id);
+                    if (list.Count == 0)
+                        expirySchedule.Remove(buff.expireTick);
+                }
+            }
+
+            public void Tick()
+            {
+                int now = Find.TickManager.TicksGame;
+
+                if (now - lastCleanupTick >= CleanupInterval)
+                {
+                    lastCleanupTick = now;
+
+                    List<int> expiredKeys = new();
+                    foreach (var kv in expirySchedule)
+                    {
+                        if (kv.Key > now) break;
+
+                        foreach (string id in kv.Value)
+                            activeBuffs.Remove(id);
+
+                        expiredKeys.Add(kv.Key);
+                    }
+
+                    foreach (int key in expiredKeys)
+                        expirySchedule.Remove(key);
+                }
+            }
+
+            public bool HasBuff(string id) => GetBuffPower(id) > 0f;
         }
     }
 }
