@@ -31,11 +31,6 @@ namespace NeavaMods
                 }
             }
 
-            public void AddMod(ModEffectDef mod)
-            {
-                modSlots.Add(mod);
-            }
-
             public void AddModToSlot(ModEffectDef mod, int slot)
             {
                 modSlots[slot] = mod;
