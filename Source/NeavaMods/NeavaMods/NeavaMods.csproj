@@ -88,6 +88,7 @@
     <Compile Include="StatPart_StatModValue.cs" />
     <Compile Include="Timed\TimedBuff.cs" />
     <Compile Include="WeaponModComp.cs" />
+    <Compile Include="WeaponMods_GameComponenet.cs" />
     <Compile Include="Window_WeaponMod.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -72,5 +72,17 @@ namespace NeavaMods
             GenPlace.TryPlaceThing(rifle, pos, map, ThingPlaceMode.Near);
         }
 
+        [DebugAction("NeavaMods", "Set", allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        public static void SetNum()
+        {
+            WeaponMods_GameComponenet.Instance.num = 10;
+        }
+
+        [DebugAction("NeavaMods", "Print", allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        public static void PrintNum()
+        {
+            ModUtils.Msg(WeaponMods_GameComponenet.Instance.num);
+        }
+
     }
 }
