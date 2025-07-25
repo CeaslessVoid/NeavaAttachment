@@ -36,7 +36,6 @@ namespace NeavaMods
         private const int GridRows = 2;
 
         private Vector2 scrollPos;
-        private float scrollHeight;
         private int dragGroupID = -1;
 
         private List<WeaponModComp> discoveredMods = new List<WeaponModComp>();
@@ -47,7 +46,6 @@ namespace NeavaMods
 
             float slotGridHeight = (ModBoxHeight + ModSpacing) * GridRows + 120f;
             float modListHeight = 140f;
-            float spacing = 16f;
 
             Rect slotGridRect = new Rect(contentRect.x, contentRect.y, contentRect.width, slotGridHeight);
             Rect modListRect = new Rect(contentRect.x, contentRect.yMax - modListHeight, contentRect.width, modListHeight);
@@ -84,7 +82,6 @@ namespace NeavaMods
                     );
 
                     Widgets.DrawBoxSolid(cellRect, new Color(0.2f, 0.2f, 0.2f, 0.6f));
-                    Widgets.Label(cellRect.ContractedBy(4f), $"Slot {slotIndex}");
 
                     DragAndDropWidget.DropArea(dragGroupID, cellRect, obj =>
                     {
@@ -119,6 +116,8 @@ namespace NeavaMods
             foreach (var mod in discoveredMods)
             {
                 var effectDef = mod.effect;
+                if (effectDef == null) continue;
+
                 int row = i / modsPerRow;
                 int col = i % modsPerRow;
 
@@ -136,7 +135,11 @@ namespace NeavaMods
                 else
                 {
                     Widgets.DrawBoxSolid(modRect, new Color(0.3f, 0.3f, 0.3f, 0.6f));
-                    Widgets.NoneLabelCenteredVertically(modRect.ContractedBy(4f), effectDef.LabelCap);
+                    //Widgets.NoneLabelCenteredVertically(modRect.ContractedBy(4f), effectDef.LabelCap);
+
+                    Text.Anchor = TextAnchor.MiddleCenter;
+                    Widgets.Label(modRect.ContractedBy(4f), effectDef.LabelCap);
+                    Text.Anchor = TextAnchor.UpperLeft;
                 }
 
                 i++;
@@ -156,14 +159,12 @@ namespace NeavaMods
 
                 Rect dragRect = new Rect(pos.x - size.x / 2, pos.y - size.y / 2, size.x, size.y);
                 Widgets.DrawBoxSolid(dragRect, new Color(0.4f, 0.4f, 0.4f, 0.8f));
-                Widgets.Label(dragRect.ContractedBy(4f), def.LabelCap);
+                Widgets.NoneLabelCenteredVertically(dragRect.ContractedBy(4f), def.LabelCap);
             }
         }
 
         private void RefreshNearbyMods()
         {
-            ModUtils.Msg("Clear");
-
             discoveredMods.Clear();
             IntVec3 center = internalBuilding.Position;
             Map map = internalBuilding.Map;
