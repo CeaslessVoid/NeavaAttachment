@@ -11,8 +11,6 @@ namespace NeavaMods
 {
     public class ModificationDef : ThingDef
     {
-        public ModEffectDef effectDef;
-
         [NoTranslate]
         public List<string> Tags;
 

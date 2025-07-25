@@ -11,7 +11,6 @@ namespace NeavaMods
     public class WeaponModComp : ThingWithComps
     {
         public ModEffectDef effect;
-
         public override string DescriptionDetailed
         {
             get

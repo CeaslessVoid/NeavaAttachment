@@ -30,6 +30,7 @@ namespace NeavaMods
         private const float ModBoxWidth = 160f;
         private const float ModBoxHeight = 60f;
         private const float ModSpacing = 10f;
+        private const float ModListTopPadding = 10f;
 
         private const int GridColumns = 4;
         private const int GridRows = 2;
@@ -37,6 +38,8 @@ namespace NeavaMods
         private Vector2 scrollPos;
         private float scrollHeight;
         private int dragGroupID = -1;
+
+        private List<WeaponModComp> discoveredMods = new List<WeaponModComp>();
 
         public override void DoWindowContents(Rect inRect)
         {
@@ -51,6 +54,7 @@ namespace NeavaMods
 
             dragGroupID = DragAndDropWidget.NewGroup(null);
 
+            RefreshNearbyMods();
             DrawModList(modListRect);
             DrawModSlotGrid(slotGridRect);
             DrawDragGhost();
@@ -101,41 +105,46 @@ namespace NeavaMods
             int modsPerRow = Mathf.FloorToInt((rect.width - Padding * 2) / (ModBoxWidth + ModSpacing));
             if (modsPerRow < 1) modsPerRow = 1;
 
-            float contentWidth = modsPerRow * (ModBoxWidth + ModSpacing);
-            float viewHeight = 2 * (ModBoxHeight + ModSpacing); // 2 rows
+            int totalRows = Mathf.CeilToInt((float)discoveredMods.Count / modsPerRow);
+            float contentWidth = rect.width - Padding * 2;
+            float viewHeight = totalRows * (ModBoxHeight + ModSpacing) + ModListTopPadding;
             Rect viewRect = new Rect(0f, 0f, contentWidth, viewHeight);
+
+            float totalRowWidth = modsPerRow * (ModBoxWidth + ModSpacing) - ModSpacing;
+            float startX = (viewRect.width - totalRowWidth) / 2f;
 
             Widgets.BeginScrollView(rect, ref scrollPos, viewRect);
 
             int i = 0;
-            foreach (var effectDef in DefDatabase<ModEffectDef>.AllDefs)
+            foreach (var mod in discoveredMods)
             {
+                var effectDef = mod.effect;
                 int row = i / modsPerRow;
                 int col = i % modsPerRow;
 
                 Rect modRect = new Rect(
-                    col * (ModBoxWidth + ModSpacing),
-                    row * (ModBoxHeight + ModSpacing),
+                    startX + col * (ModBoxWidth + ModSpacing),
+                    ModListTopPadding + row * (ModBoxHeight + ModSpacing),
                     ModBoxWidth,
                     ModBoxHeight
                 );
 
                 if (DragAndDropWidget.Draggable(dragGroupID, modRect, effectDef, null, null))
                 {
-                    // TODO
+                    // Dragging
                 }
                 else
                 {
                     Widgets.DrawBoxSolid(modRect, new Color(0.3f, 0.3f, 0.3f, 0.6f));
-                    Widgets.Label(modRect.ContractedBy(4f), effectDef.LabelCap);
+                    Widgets.NoneLabelCenteredVertically(modRect.ContractedBy(4f), effectDef.LabelCap);
                 }
 
                 i++;
             }
 
-            scrollHeight = viewHeight;
             Widgets.EndScrollView();
         }
+
 
         private void DrawDragGhost()
         {
@@ -150,6 +159,25 @@ namespace NeavaMods
                 Widgets.Label(dragRect.ContractedBy(4f), def.LabelCap);
             }
         }
+
+        private void RefreshNearbyMods()
+        {
+            ModUtils.Msg("Clear");
+
+            discoveredMods.Clear();
+            IntVec3 center = internalBuilding.Position;
+            Map map = internalBuilding.Map;
+            float radius = 10f;
+
+            foreach (var thing in GenRadial.RadialDistinctThingsAround(center, map, radius, useCenter: true))
+            {
+                if (thing.def is ModificationDef && thing is WeaponModComp modItem && modItem.effect != null)
+                {
+                    discoveredMods.Add(modItem);
+                }
+            }
+        }
+
 
         public static void ToggleWindow(Building_WeaponMod building)
         {
