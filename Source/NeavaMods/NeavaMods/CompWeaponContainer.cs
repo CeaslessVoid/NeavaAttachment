@@ -28,11 +28,11 @@ namespace NeavaMods
             TaggedString label = base.Empty ? "Nothing".Translate() : base.ContainedThing.LabelCap;
             return ("Contents".Translate() + ": " + label).Trim();
         }
-
     }
 
     public class Building_WeaponMod : Building
     {
+        public float ScanRadius => 10f;
         public bool PowerOn
         {
             get
@@ -45,6 +45,13 @@ namespace NeavaMods
                 return compPowerTrader != null && compPowerTrader.PowerOn;
             }
         }
+
+        //public override void DrawExtraSelectionOverlays()
+        //{
+        //    base.DrawExtraSelectionOverlays();
+
+        //    GenDraw.DrawRadiusRing(Position, ScanRadius);   
+        //}
 
         public ThingWithComps HoldingItem
         {
@@ -88,29 +95,13 @@ namespace NeavaMods
             }
         }
 
-        public Building_WeaponMod.ModificationInstance Instance
-        {
-            get
-            {
-                if (instance != null)
-                {
-                    return instance;
-                }
-                instance = new Building_WeaponMod.ModificationInstance(this);
-                return instance;
-            }
-        }
-
         protected CompPowerTrader power;
 
         protected CompThingContainer container;
 
-        private Building_WeaponMod.ModificationInstance instance;
-
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Deep.Look<Building_WeaponMod.ModificationInstance>(ref instance, "instance", Array.Empty<object>());
         }
 
         public void InsertItem(ThingWithComps item)
@@ -122,7 +113,6 @@ namespace NeavaMods
         {
             if (ContainerComp.innerContainer.TryDropAll(this.InteractionCell, base.Map, ThingPlaceMode.Near, null, null, true))
             {
-                Instance.Reset();
                 return;
             }
             SoundDefOf.ClickReject.PlayOneShotOnCamera(null);
@@ -166,35 +156,6 @@ namespace NeavaMods
             };
         }
 
-        public class ModificationInstance : IExposable
-        {
-            protected CompWeaponModContainer WeaponMod
-            {
-                get
-                {
-                    return parent.WeaponMod;
-                }
-            }
-            public ModificationInstance()
-            {
-            }
-            public ModificationInstance(Building_WeaponMod parent)
-            {
-                this.parent = parent;
-            }
-            public void ExposeData()
-            {
-                Scribe_References.Look<Building_WeaponMod>(ref parent, "parent", true);
-            }
-
-            public void Reset()
-            {
-                StatsReportUtility.Reset();
-                StatsReportUtility.Notify_QuickSearchChanged();
-            }
-
-            private Building_WeaponMod parent;
-        }
     }
 
 }

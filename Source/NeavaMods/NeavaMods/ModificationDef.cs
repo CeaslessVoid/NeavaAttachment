@@ -37,6 +37,12 @@ namespace NeavaMods
 
         public List<string> Extensions;
 
+        [NoTranslate]
+        public string imagePath;
+
+        [Unsaved(false)]
+        private Texture2D cachedImage;
+
         [Unsaved]
         public Dictionary<StatDef, float> statOffsetDict;
 
@@ -45,6 +51,25 @@ namespace NeavaMods
 
         [Unsaved]
         public Color? color;
+
+        public Texture2D Image
+        {
+            get
+            {
+                if (cachedImage == null)
+                {
+                    if (imagePath.NullOrEmpty())
+                    {
+                        cachedImage = BaseContent.BadTex;
+                    }
+                    else
+                    {
+                        cachedImage = (ContentFinder<Texture2D>.Get(imagePath, true) ?? BaseContent.BadTex);
+                    }
+                }
+                return cachedImage;
+            }
+        }
 
         public override void ResolveReferences()
         {

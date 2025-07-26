@@ -73,12 +73,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompModContainer.cs" />
     <Compile Include="CompWeaponContainer.cs" />
     <Compile Include="CompWeaponModContainer.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="EffectExtensions\Bases.cs" />
     <Compile Include="EffectExtensions\TestEffects.cs" />
     <Compile Include="FloatMenuOptionProvider_WeaponMod.cs" />
+    <Compile Include="ITab_ContentsWeaponModHolder.cs" />
     <Compile Include="JobDriver_InsertEquippedWeapon.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MenuPatch.cs" />

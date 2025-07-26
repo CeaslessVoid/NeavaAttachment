@@ -9,9 +9,9 @@
             <texPath>Things/Building/ModificationStation</texPath>
             <graphicClass>Graphic_Multi</graphicClass>
             <shadowData>
-                <volume>(0.9,0.6,9.9)</volume>
+                <volume>(0.7,0.6,0.7)</volume>
             </shadowData>
-            <drawSize>1.23437</drawSize>
+            <drawSize>1.0</drawSize>
         </graphicData>
         <uiIconScale>0.85</uiIconScale>
         <drawerType>MapMeshAndRealTime</drawerType>
@@ -38,9 +38,6 @@
             <li>MicroelectronicsBasics</li>
         </researchPrerequisites>
         <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
-        <inspectorTabs>
-            <li>ITab_Storage</li>
-        </inspectorTabs>
         <statBases>
             <MaxHitPoints>300</MaxHitPoints>
             <WorkToBuild>25000</WorkToBuild>

@@ -11,6 +11,8 @@ namespace NeavaMods
     public class WeaponModComp : ThingWithComps
     {
         public ModEffectDef effect;
+
+        public bool autoLoad = true;
         public override string DescriptionDetailed
         {
             get
@@ -63,6 +65,35 @@ namespace NeavaMods
 
             return text;
         }
+
+        public Thing targetContainer;
+
+        //private CompProperties_ModContainer ParentContainer
+        //{
+        //    get
+        //    {
+        //        IThingHolder parentHolder = ParentHolder;
+        //        if (parentHolder != null)
+        //        {
+        //            CompProperties_ModContainer compWeaponMod = parentHolder as CompProperties_ModContainer;
+        //            if (compWeaponMod != null)
+        //            {
+        //                return compWeaponMod;
+        //            }
+        //        }
+        //        return null;
+        //    }
+        //}
+
+        //public override void TickRare()
+        //{
+        //    base.TickRare();
+
+        //    if (Spawned && !this.autoLoad && targetContainer != null)
+        //    {
+        //        targetContainer = null;
+        //    }
+        //}
 
         public override void PostMake()
         {

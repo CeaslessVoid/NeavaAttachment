@@ -11,5 +11,7 @@
     <Empty>Empty</Empty>
 
     <InsertItem>Insert {0} into {1}</InsertItem>
+
+    <WeaponModsStored>Mods stored</WeaponModsStored>
     
 </LanguageData>
