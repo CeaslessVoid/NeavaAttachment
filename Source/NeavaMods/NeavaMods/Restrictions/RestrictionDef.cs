@@ -27,6 +27,6 @@ namespace NeavaMods.Restrictions
 
     public interface IRestrictEffect
     {
-        public bool CheckAvailable(Thing target);
+        bool CheckAvailable(Thing target);
     }
 }

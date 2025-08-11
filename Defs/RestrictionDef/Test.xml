@@ -3,5 +3,8 @@
     <NeavaMods.Restrictions.RestrictionDef>
         <defName>Test1</defName>
         <label>Ranged Only</label>
+        <Extension>
+            <li Class="NeavaMods.Restrictions.RestrictionRangedOnly" />
+        </Extension>
     </NeavaMods.Restrictions.RestrictionDef>
 </Defs>

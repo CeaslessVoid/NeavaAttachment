@@ -35,7 +35,7 @@ namespace NeavaMods
                 return;
             }
 
-            modComp.AddModToSlot(NeavaDefOf.TestEffect, 0);
+            modComp.Add(NeavaDefOf.TestEffect);
 
             modComp.CacheEffects();
 
@@ -65,7 +65,7 @@ namespace NeavaMods
                 return;
             }
 
-            modComp.AddModToSlot(NeavaDefOf.TestEffectt, 0);
+            modComp.Add(NeavaDefOf.TestEffectt);
 
             modComp.CacheEffects();
 

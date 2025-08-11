@@ -24,6 +24,9 @@ namespace NeavaMods
             private List<ModEffectDef> modSlots = new List<ModEffectDef>();
             public readonly Dictionary<EffectCategory, List<BaseModEffect>> cachedEffects = new Dictionary<EffectCategory, List<BaseModEffect>>();
 
+            private int maxMods = 2;
+            private int maxDrain = 30;
+
             public List<ModEffectDef> ModsSlotsListForReading
             {
                 get
@@ -32,15 +35,25 @@ namespace NeavaMods
                 }
             }
 
-            public void AddModToSlot(ModEffectDef mod, int slot)
+            //public void AddModToSlot(ModEffectDef mod, int slot)
+            //{
+            //    modSlots[slot] = mod;
+            //}
+
+            public void Add(ModEffectDef mod)
             {
-                modSlots[slot] = mod;
+                modSlots.Add(mod);
             }
+
             public override void PostExposeData()
             {
                 base.PostExposeData();
                 Scribe_Collections.Look(ref modSlots, "modSlots", LookMode.Def);
                 Scribe_Collections.Look(ref activeBuffs, "activeBuffs", LookMode.Value, LookMode.Deep);
+
+                Scribe_Values.Look(ref maxMods, "maxMods", 2);
+                Scribe_Values.Look(ref maxDrain, "maxDrain", 30);
+
                 if (Scribe.mode == LoadSaveMode.PostLoadInit)
                 {
                     CacheEffects();
@@ -196,12 +209,17 @@ namespace NeavaMods
 
             public override string CompInspectStringExtra()
             {
-                if (this.modSlots.NullOrEmpty<ModEffectDef>())
+                if (modSlots.NullOrEmpty<ModEffectDef>())
                 {
                     return null;
                 }
                 return "Stat_ThingWeaponMods_Label".Translate() + ": " + (from x in this.ModsSlotsListForReading where x != null select x.label).ToCommaList(false, false).CapitalizeFirst();
             }
+
+            //public override string GetDescriptionPart()
+            //{
+            //    return "HELLO";
+            //}
 
             // Buff Tracker
             private Dictionary<string, TimedBuff> activeBuffs = new();

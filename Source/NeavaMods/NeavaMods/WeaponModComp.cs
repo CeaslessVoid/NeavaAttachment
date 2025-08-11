@@ -33,9 +33,13 @@ namespace NeavaMods
                 string effectLabel = effect.label ?? "Unknown";
                 string effectDesc = effect.description ?? "";
 
+                string restriction = effect.restrictionDef.label ?? "";
+
                 return $"{baseDesc}\n\n" +
                        $"{effectLabel} ({effect.Drain})\n" +
-                       $"{effectDesc}";
+                       $"{effectDesc}\n" +
+                       $"{restriction}";
+
             }
         }
 

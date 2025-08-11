@@ -23,6 +23,8 @@
             <li>basic</li>
         </Tags>
 
+        <restrictionDef>Test1</restrictionDef>
+
         <Drain>1</Drain>
     </NeavaMods.ModEffectDef>
 
