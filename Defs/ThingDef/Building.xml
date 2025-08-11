@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-    <ThingDef ParentName="BuildingBase">
+    <!-- <ThingDef ParentName="BuildingBase">
         <defName>ModificationStation</defName>
         <label>modification station</label>
         <description>This machine can infuse modifications into the weapon that is placed on this station. Weapon modifications must placed close to this station for it to be a target. Once a weapon modification is infused into the weapon, it cannot be extracted cleanly.</description>
@@ -67,5 +67,5 @@
 
         <designationCategory>Misc</designationCategory>
         <minifiedDef>MinifiedThing</minifiedDef>
-    </ThingDef>
+    </ThingDef> -->
 </Defs>

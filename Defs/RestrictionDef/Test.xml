@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <NeavaMods.Restrictions.RestrictionDef>
+        <defName>Test1</defName>
+        <label>Ranged Only</label>
+    </NeavaMods.Restrictions.RestrictionDef>
+</Defs>

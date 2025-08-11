@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using NeavaMods.Restrictions;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,8 @@ namespace NeavaMods
         [Unsaved]
         public Color? color;
 
+        public RestrictionDef restrictionDef;
+
         public Texture2D Image
         {
             get
@@ -70,6 +73,68 @@ namespace NeavaMods
                 return cachedImage;
             }
         }
+
+        public bool AvailableOn(Thing thing)
+        {
+            if (restrictionDef == null)
+                return true;
+
+            var thingTagsList = thing.def.weaponTags;
+            string defName = thing.def.defName;
+
+            HashSet<string> thingTags = thingTagsList != null ? new HashSet<string>(thingTagsList) : new HashSet<string>();
+
+            if (restrictionDef.Tags != null)
+            {
+                foreach (var tag in restrictionDef.Tags)
+                {
+                    if (!thingTags.Contains(tag))
+                        return false;
+                }
+            }
+
+            if (restrictionDef.TagsExclude != null)
+            {
+                foreach (var tag in restrictionDef.TagsExclude)
+                {
+                    if (thingTags.Contains(tag))
+                        return false;
+                }
+            }
+
+            if (restrictionDef.TagsAny != null && restrictionDef.TagsAny.Count > 0)
+            {
+                bool foundAny = false;
+                foreach (var tag in restrictionDef.TagsAny)
+                {
+                    if (thingTags.Contains(tag))
+                    {
+                        foundAny = true;
+                        break;
+                    }
+                }
+                if (!foundAny)
+                    return false;
+            }
+
+            if (restrictionDef.Def != null && restrictionDef.Def.Count > 0)
+            {
+                if (string.IsNullOrEmpty(defName) || !restrictionDef.Def.Contains(defName))
+                    return false;
+            }
+
+            if (restrictionDef.Extension != null)
+            {
+                foreach (var ext in restrictionDef.Extension)
+                {
+                    if (ext != null && !ext.CheckAvailable(thing))
+                        return false;
+                }
+            }
+
+            return true;
+        }
+
 
         public override void ResolveReferences()
         {
@@ -104,4 +169,6 @@ namespace NeavaMods
             }
         }
     }
+
+    
 }

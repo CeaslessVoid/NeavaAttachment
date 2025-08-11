@@ -3,9 +3,9 @@
     <NeavaMods.ModEffectDef>
         <defName>TestEffect</defName>
         <label>TestLabel</label>
-        <description>TestDesc I need to make this a long ass description to test out shit. Post Ves Skrum. AHidsjbhsafd aasffd sa  fad fdsa as sdff sa sfda ass aa ss </description>
+        <description>TestDesc I need to make this a long ass description to test out shit. Post Ves Skrum. AHidsjbhsafd aasffd sa  fad fdsa as sdff sa sfda ass aa ss</description>
 
-        <imagePath>UI/Mods/Test/Test<imagePath>
+        <imagePath>UI/Mods/Test/Test</imagePath>
 
         <statOffsets>
             <RangedWeapon_Cooldown>-0.99</RangedWeapon_Cooldown>
@@ -64,5 +64,5 @@
 
         <Drain>3</Drain>
     </NeavaMods.ModEffectDef>
-
+    
 </Defs>
