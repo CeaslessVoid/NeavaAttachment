@@ -20,8 +20,8 @@ namespace NeavaMods
 
         public class CompWeaponModContainer : ThingComp
         {
-            //private List<ModEffectDef> modSlots = Enumerable.Repeat<ModEffectDef>(null, 8).ToList();
-            private List<ModEffectDef> modSlots = new List<ModEffectDef>();
+            private List<ModEffectDef> modSlots = Enumerable.Repeat<ModEffectDef>(null, 8).ToList();
+            //private List<ModEffectDef> modSlots = new List<ModEffectDef>();
             public readonly Dictionary<EffectCategory, List<BaseModEffect>> cachedEffects = new Dictionary<EffectCategory, List<BaseModEffect>>();
 
             private int maxMods = 2;
@@ -35,10 +35,10 @@ namespace NeavaMods
                 }
             }
 
-            //public void AddModToSlot(ModEffectDef mod, int slot)
-            //{
-            //    modSlots[slot] = mod;
-            //}
+            public void AddModToSlot(ModEffectDef mod, int slot)
+            {
+                modSlots[slot] = mod;
+            }
 
             public void Add(ModEffectDef mod)
             {
